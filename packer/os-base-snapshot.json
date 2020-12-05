@@ -1,6 +1,6 @@
 {
   "variables": {
-    "hcloud_token" : "{{ env `HCLOUD_TOKEN` }}"
+    "hcloud_token": "{{ env `HCLOUD_TOKEN` }}"
   },
   "provisioners": [
     {
@@ -16,6 +16,12 @@
       "ssh_username": "root",
       "location": "nbg1",
       "server_type": "cx11"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "base-manifest.json"
     }
   ]
 }
