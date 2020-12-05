@@ -20,16 +20,24 @@
     - name: Configure OS hardening
       import_role:
         name: devsec.hardening.os_hardening
+      tags:
+        - hardening
+        - os
 
     - name: Configure SSH hardening
       import_role:
         name: devsec.hardening.ssh_hardening
       vars:
         ssh_permit_root_login: 'yes'
+      tags:
+        - hardening
+        - ssh
 
     - name: Configure Java on the system
       import_role:
         name: geerlingguy.java
+      tags:
+        - java
 
     - name: Configure Nginx
       import_tasks: nginx.yml
@@ -38,3 +46,5 @@
 
     - name: Include Jenkins tasks 
       import_tasks: jenkins.yml
+      tags:
+        - jenkins
