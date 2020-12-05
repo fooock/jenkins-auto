@@ -1,7 +1,11 @@
 - name: Provision base image
-  hosts: default
+  hosts: all
 
   pre_tasks:
+    - name: Shut down if not Ubuntu flavored systems
+      command: /sbin/shutdown -t now
+      when: ansible_facts['os_family'] == "Ubuntu"
+
     - name: Update system repository
       apt:
         update_cache: yes
@@ -17,8 +21,13 @@
   roles:
     - devsec.hardening.os_hardening
     - devsec.hardening.ssh_hardening
+    - geerlingguy.java
   vars:
     # Enable IPv4 traffic forwarding in order to use Docker 
     sysctl_config:
       net.ipv4.ip_forward: 1
     ssh_permit_root_login: 'yes'
+
+  post_tasks:
+    - name: Include Jenkins tasks 
+      import_tasks: jenkins.yml

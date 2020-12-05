@@ -13,7 +13,7 @@ You need to set an environment variable called `HCLOUD_TOKEN` in order to create
 
 In order to execute this scripts you will need to have installed in your computer:
 
-* [Docker](https://docs.docker.com/engine/install/). At least version `19.03.13`
+* [Docker](https://docs.docker.com/engine/install/) version `19.03.13`
 * [GNU Make](https://www.gnu.org/software/make/) version `4.1` 
 
 ## How to
