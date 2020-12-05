@@ -7,6 +7,11 @@
         update_cache: yes
         upgrade: dist
 
+    - name: Install git
+      apt:
+        name: git
+        state: present
+
   collections:
     - devsec.hardening
   roles:
