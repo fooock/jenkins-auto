@@ -4,3 +4,9 @@ collections:
 roles:
   - src: geerlingguy.java
     version: 1.10.0
+
+  - src: nginxinc.nginx
+    version: 0.18.1
+
+  - src: nginxinc.nginx_config
+    version: 0.3.0

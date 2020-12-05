@@ -2,7 +2,7 @@
   hosts: all
 
   pre_tasks:
-    - name: Shut down if not Ubuntu flavored systems
+    - name: Shutdown if not Ubuntu system
       command: /sbin/shutdown -t now
       when: ansible_facts['os_family'] == "Ubuntu"
 
@@ -11,23 +11,30 @@
         update_cache: yes
         upgrade: dist
 
+  tasks:
     - name: Install git
       apt:
         name: git
         state: present
 
-  collections:
-    - devsec.hardening
-  roles:
-    - devsec.hardening.os_hardening
-    - devsec.hardening.ssh_hardening
-    - geerlingguy.java
-  vars:
-    # Enable IPv4 traffic forwarding in order to use Docker 
-    sysctl_config:
-      net.ipv4.ip_forward: 1
-    ssh_permit_root_login: 'yes'
+    - name: Configure OS hardening
+      import_role:
+        name: devsec.hardening.os_hardening
 
-  post_tasks:
+    - name: Configure SSH hardening
+      import_role:
+        name: devsec.hardening.ssh_hardening
+      vars:
+        ssh_permit_root_login: 'yes'
+
+    - name: Configure Java on the system
+      import_role:
+        name: geerlingguy.java
+
+    - name: Configure Nginx
+      import_tasks: nginx.yml
+      tags:
+        - nginx
+
     - name: Include Jenkins tasks 
       import_tasks: jenkins.yml

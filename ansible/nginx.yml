@@ -1,0 +1,57 @@
+- name: Install nginx
+  include_role:
+    name: nginxinc.nginx
+  vars:
+    nginx_logrotate_conf_enable: true
+    nginx_logrotate_conf:
+      paths:
+        - /var/log/nginx/*.log
+      options:
+        - daily
+        - missingok
+        - rotate 14
+        - compress
+        - delaycompress
+        - notifempty
+        - sharedscripts
+
+- name: Configure reverse proxy for Jenkins
+  include_role:
+    name: nginxinc.nginx_config
+  vars:
+    nginx_config_http_template_enable: true
+    nginx_config_http_template:
+      default:
+        servers:
+          jenkins_server:
+            listen:
+              listen_localhost:
+                ip: 0.0.0.0
+                port: 80
+                opts:
+                  - default_server
+            server_name: localhost
+            reverse_proxy:
+              locations:
+                backend:
+                  location: /
+                  proxy_hide_headers:
+                    - X-Powered-By
+                  proxy_pass: http://backend
+                  proxy_set_header:
+                    header_host:
+                      name: Host
+                      value: $host
+                    header_x_real_ip:
+                      name: X-Real-IP
+                      value: $remote_addr
+                    header_x_forwarded_for:
+                      name: X-Forwarded-For
+                      value: $proxy_add_x_forwarded_for
+        upstreams:
+          jenkins_upstream:
+            name: backend
+            servers:
+              jenkins_server:
+                address: localhost
+                port: 8080
