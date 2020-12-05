@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "hcloud_token": "{{ env `HCLOUD_TOKEN` }}"
+  },
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "ansible/playbook.yml"
+    }
+  ],
+  "builders": [
+    {
+      "type": "hcloud",
+      "token": "{{ user `hcloud_token` }}",
+      "image": "ubuntu-20.04",
+      "ssh_username": "root",
+      "location": "nbg1",
+      "server_type": "cx11"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "base-manifest.json"
+    }
+  ]
+}

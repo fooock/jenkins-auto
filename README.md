@@ -13,8 +13,9 @@ You need to set an environment variable called `HCLOUD_TOKEN` in order to create
 
 In order to execute this scripts you will need to have installed in your computer:
 
-* [Docker](https://docs.docker.com/engine/install/) version `19.03.13`
-* [GNU Make](https://www.gnu.org/software/make/) version `4.1` 
+* [Ansible](https://www.ansible.com/) version ` 2.9.15`
+* [GNU Make](https://www.gnu.org/software/make/) version `4.1`
+* [Packer](https://www.packer.io/) version `1.6.5`
 
 ## How to
 
@@ -26,3 +27,10 @@ $ make ansible-requirements
 ```
 
 >This will install all required roles and collections needed to provision the base images.
+
+Now you can execute the directive required to generate the base image with the common components to run
+a Jenkins instance.
+
+```bash
+$ make packer-build
+```
