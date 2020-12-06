@@ -4,7 +4,7 @@
 
 Install and configure Jenkins in an automated way using the [Hetzner](https://console.hetzner.cloud/projects) cloud provider.
 
-You need to set an environment variable called `HCLOUD_TOKEN` in order to create all remote resources.
+You need to set an environment variable called `HCLOUD_TOKEN` in order to create all remote resources. To generate it, go to your [project](https://console.hetzner.cloud/projects) security tab and click on `Generate API Token` button.
 
 >:moneybag: Keep in mind that you may be charged by the cloud provider if you use this repository. 
 
@@ -40,5 +40,5 @@ The last step is to provision the resources using terraform. Just execute this c
 $ make terraform-apply TERRAFORM_SSH_KEYS='["your_sshkey"]'
 ```
 
->**Important** :exclamation:
->Change `your_sshkey` from the correct value of your Hetznet cloud security SSH keys.
+>**Important**:exclamation:
+>Change the `your_sshkey` value by your Hetznet cloud security SSH keys name.
