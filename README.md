@@ -16,6 +16,7 @@ In order to execute this scripts you will need to have installed in your compute
 * [Ansible](https://www.ansible.com/) version ` 2.9.15`
 * [GNU Make](https://www.gnu.org/software/make/) version `4.1`
 * [Packer](https://www.packer.io/) version `1.6.5`
+* [Terraform](https://registry.terraform.io/) version `0.14.0`
 
 ## How to
 
@@ -34,3 +35,12 @@ a Jenkins instance.
 ```bash
 $ make packer-build
 ```
+
+The last step is to create the resources using terraform. Just execute this command:
+
+```bash
+$ make terraform-apply TERRAFORM_SSH_KEYS='["your_sshkey"]'
+```
+
+>**Important!**
+>Change `your_sshkey` from the correct value of your Hetznet cloud security SSH keys.
