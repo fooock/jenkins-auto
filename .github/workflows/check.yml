@@ -21,3 +21,20 @@ jobs:
         with:
           command: validate
           target: packer/os-base-snapshot.json
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.0
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check terraform
+        continue-on-error: false
+
+      - name: Terraform init
+        id: init
+        run: terraform init terraform
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate terraform
