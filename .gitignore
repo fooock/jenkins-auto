@@ -3,3 +3,4 @@ base-manifest.json
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+local/scripts/auth-user.groovy

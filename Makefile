@@ -7,7 +7,15 @@ ANSIBLE_EXTRA :=
 
 TERRAFORM_SSH_KEYS := ["sshkey"]
 
+JENKINS_AUTH_USER := jenkins
+JENKINS_AUTH_PASSWORD := password
+
 install-requirements: ansible-requirements terraform-init
+
+generate-jenkins-auth:
+	JENKINS_AUTH_USER=$(JENKINS_AUTH_USER) \
+	JENKINS_AUTH_PASSWORD=$(JENKINS_AUTH_PASSWORD) \
+	envsubst < local/scripts/auth-user.tpl > local/scripts/auth-user.groovy
 
 #                  _ _     _      
 #                 (_) |   | |     
@@ -82,12 +90,13 @@ terraform-destroy:
 # |_|\___/ \___\__,_|_|
 #                      
 
-local-jenkins-start:
-	docker run -d \
+local-jenkins-start: generate-jenkins-auth
+	docker run --rm \
 	--name jenkins \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:50000:50000 \
-	-v local:/var/jenkins_home \
+	-v $(shell pwd)/local/scripts:/usr/share/jenkins/ref/init.groovy.d/ \
+	-v $(shell pwd)/local/jenkins.install.UpgradeWizard.state:/var/jenkins_home/jenkins.install.UpgradeWizard.state \
 	jenkins/jenkins:lts
 
 local-jenkins-stop:
