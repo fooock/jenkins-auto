@@ -15,7 +15,9 @@ install-requirements: ansible-requirements terraform-init
 generate-jenkins-auth:
 	JENKINS_AUTH_USER=$(JENKINS_AUTH_USER) \
 	JENKINS_AUTH_PASSWORD=$(JENKINS_AUTH_PASSWORD) \
-	envsubst < local/scripts/auth-user.tpl > local/scripts/auth-user.groovy
+	envsubst \
+	'$${JENKINS_AUTH_USER} $${JENKINS_AUTH_PASSWORD}' \
+	< local/scripts/auth-user.tpl > local/scripts/auth-user.groovy
 
 #                  _ _     _      
 #                 (_) |   | |     
