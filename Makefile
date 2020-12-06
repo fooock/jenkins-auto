@@ -10,8 +10,8 @@ TERRAFORM_SSH_KEYS := ["sshkey"]
 install-requirements: ansible-requirements terraform-init
 
 ansible-requirements:
-	ansible-galaxy collection install -r ansible/requirements.yml -p $(ANSIBLE_COLLECTIONS_PATH)
-	ansible-galaxy role install -r ansible/requirements.yml --roles-path $(ANSIBLE_ROLES_PATH)
+	ansible-galaxy collection install -f -r ansible/requirements.yml -p $(ANSIBLE_COLLECTIONS_PATH)
+	ansible-galaxy role install -f -r ansible/requirements.yml --roles-path $(ANSIBLE_ROLES_PATH)
 
 ansible-check:
 	ansible-playbook -i localhost, ansible/playbook.yml --syntax-check

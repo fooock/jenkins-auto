@@ -1,6 +1,7 @@
 ---
 collections:
-  - devsec.hardening
+  - name: devsec.hardening
+    version: 7.0.0
 roles:
   - src: geerlingguy.java
     version: 1.10.0
