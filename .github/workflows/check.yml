@@ -16,15 +16,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set required environment variables
-        env:
-          HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
-
       - name: Validate packer
         uses: operatehappy/packer-github-actions@master
         with:
           command: validate
           target: packer/os-base-snapshot.json
+          arguments: -var 'hcloud_token=${{ secrets.HCLOUD_TOKEN }}'
 
       - uses: hashicorp/setup-terraform@v1
         with:
