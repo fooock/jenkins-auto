@@ -91,7 +91,7 @@ terraform-destroy:
 #                      
 
 local-jenkins-start: generate-jenkins-auth
-	docker run --rm \
+	docker run --rm -d \
 	--name jenkins \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:50000:50000 \

@@ -42,5 +42,13 @@ The last step is to provision the resources using terraform. Just execute this c
 $ make terraform-apply TERRAFORM_SSH_KEYS='["your_sshkey"]'
 ```
 
->**Important**:exclamation:
->Change the `your_sshkey` value by your Hetznet cloud security SSH keys name.
+>Use your own SSH key name from the Hetznet dashboard.
+
+
+## Local development
+
+You will need Docker installed. To test all scripts in a local environment before deploy the final version you will need to execute the next directive. Note that you can customize some values, like the default Jenkins user and password:
+
+```bash
+$ make local-jenkins-start JENKINS_AUTH_USER=test JENKINS_AUTH_PASSWORD=password
+```
