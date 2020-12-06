@@ -42,5 +42,5 @@ The last step is to create the resources using terraform. Just execute this comm
 $ make terraform-apply TERRAFORM_SSH_KEYS='["your_sshkey"]'
 ```
 
->**Important!**
+>**Important** :exclamation:
 >Change `your_sshkey` from the correct value of your Hetznet cloud security SSH keys.
