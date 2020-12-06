@@ -52,3 +52,5 @@ You will need Docker installed. To test all scripts in a local environment befor
 ```bash
 $ make local-jenkins-start JENKINS_AUTH_USER=test JENKINS_AUTH_PASSWORD=password
 ```
+
+If you do not specify any user or password the default ones are `jenkins` and `password`.

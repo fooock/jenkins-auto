@@ -15,7 +15,11 @@
       "image": "ubuntu-20.04",
       "ssh_username": "root",
       "location": "nbg1",
-      "server_type": "cx11"
+      "server_type": "cx11",
+      "snapshot_labels": {
+        "name": "jenkins-base",
+        "tool": "packer"
+      }
     }
   ],
   "post-processors": [
