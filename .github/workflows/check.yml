@@ -16,6 +16,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set required environment variables
+        env:
+          HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
+
       - name: Validate packer
         uses: operatehappy/packer-github-actions@master
         with:
