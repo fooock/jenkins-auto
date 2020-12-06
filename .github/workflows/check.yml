@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+
+      - name: Validate packer
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: validate
+          target: packer/os-base-snapshot.json
