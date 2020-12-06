@@ -7,7 +7,7 @@ order to use this scripts.
 
 You need to set an environment variable called `HCLOUD_TOKEN` in order to create all needed resources.
 
->:moneybag: Keep in mind that if you use this you may be charged. 
+>:moneybag: Keep in mind that you may be charged by the cloud provider if you use this repository. 
 
 ## Tools you need
 
