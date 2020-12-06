@@ -24,7 +24,7 @@ First you need to have all requirements installed on your local machine. When do
 to execute this directive:
 
 ```bash
-$ make ansible-requirements
+$ make install-requirements
 ```
 
 >This will install all required roles and collections needed to provision the base images.
