@@ -1,4 +1,4 @@
-name: Deploy content to server
+name: Check project files
 on:
   push:
     branches:
@@ -15,14 +15,3 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 0
-
-    - name: Validate ansible playbook
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: playbook.yml
-        directory: ./ansible
-        inventory: |
-          [all]
-          localhost
-        options: |
-          --syntax-check
