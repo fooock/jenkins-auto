@@ -1,5 +1,7 @@
 # Jenkins provisioning
 
+![Check project files](https://github.com/fooock/jenkins-auto/workflows/Check%20project%20files/badge.svg)
+
 >:construction: Work in progress
 
 Install and configure Jenkins in an automated way using the [Hetzner](https://console.hetzner.cloud/projects) cloud provider.
