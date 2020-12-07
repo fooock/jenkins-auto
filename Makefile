@@ -52,11 +52,9 @@ endif
 
 packer-check:
 	packer validate packer/os-base-snapshot.json 
-	packer validate packer/os-master-snapshot.json 
 
-packer-build:
+packer-build: generate-jenkins-auth
 	packer build packer/os-base-snapshot.json 
-	packer build packer/os-master-snapshot.json
 
 #  _                       __                     
 # | |                     / _|                    

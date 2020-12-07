@@ -18,10 +18,11 @@
     {
       "type": "shell",
       "inline": [
+        "export JENKINS_HOME=/var/lib/jenkins",
         "mkdir -p $JENKINS_HOME/init.hook.d/",
         "mv /tmp/jenkins.install.UpgradeWizard.state $JENKINS_HOME/jenkins.install.UpgradeWizard.state",
         "mv /tmp/auth-user.groovy $JENKINS_HOME/init.hook.d/auth-user.groovy",
-        "chown -R jenkins:jenkins $JENKINS_HOME/"
+        "chown -R jenkins:jenkins $JENKINS_HOME"
       ]
     }
   ],
