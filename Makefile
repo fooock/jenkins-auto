@@ -4,6 +4,7 @@ ANSIBLE_TEST_INVENTORY_PATH := ansible/inventory-test
 ANSIBLE_SERVER_USER := root
 ANSIBLE_SERVER_HOST :=
 ANSIBLE_EXTRA := 
+ANSIBLE_PLAYBOOK_NAME := base
 
 TERRAFORM_SSH_KEYS := ["sshkey"]
 
@@ -32,13 +33,17 @@ ansible-requirements:
 	ansible-galaxy role install -f -r ansible/requirements.yml --roles-path $(ANSIBLE_ROLES_PATH)
 
 ansible-check:
-	ansible-playbook -i localhost, ansible/playbook.yml --syntax-check
+	ansible-playbook -i localhost, ansible/base-playbook.yml --syntax-check
+	ansible-playbook -i localhost, ansible/master-playbook.yml --syntax-check
 
-ansible-run:
+ansible-run: generate-jenkins-auth
 ifeq ($(ANSIBLE_SERVER_HOST),)
 	$(error Use: make ansible-run ANSIBLE_SERVER_HOST=xxx.xxx.xxx.xxx)
 endif
-	ansible-playbook -i $(ANSIBLE_SERVER_HOST), -u $(ANSIBLE_SERVER_USER) ansible/playbook.yml $(ANSIBLE_EXTRA)
+	ansible-playbook -i $(ANSIBLE_SERVER_HOST), \
+	-u $(ANSIBLE_SERVER_USER) \
+	ansible/$(ANSIBLE_PLAYBOOK_NAME)-playbook.yml \
+	$(ANSIBLE_EXTRA)
 
 #                   _             
 #                  | |            
@@ -51,10 +56,12 @@ endif
 #
 
 packer-check:
-	packer validate packer/os-base-snapshot.json 
+	packer validate packer/os-base-snapshot.json
+	packer validate packer/os-master-snapshot.json 
 
 packer-build: generate-jenkins-auth
-	packer build packer/os-base-snapshot.json 
+	packer build packer/os-base-snapshot.json
+	packer build packer/os-master-snapshot.json
 
 #  _                       __                     
 # | |                     / _|                    

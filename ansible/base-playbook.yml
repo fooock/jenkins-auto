@@ -43,8 +43,3 @@
       import_tasks: nginx.yml
       tags:
         - nginx
-
-    - name: Include Jenkins tasks 
-      import_tasks: jenkins.yml
-      tags:
-        - jenkins
