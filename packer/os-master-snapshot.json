@@ -1,0 +1,54 @@
+{
+  "variables": {
+    "hcloud_token": "{{ env `HCLOUD_TOKEN` }}"
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "local/jenkins.install.UpgradeWizard.state",
+      "destination": "/tmp/jenkins.install.UpgradeWizard.state"
+    },
+    {
+      "type": "file",
+      "sources": [
+        "local/scripts/auth-user.groovy"
+      ],
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p $JENKINS_HOME/init.hook.d/",
+        "mv /tmp/jenkins.install.UpgradeWizard.state $JENKINS_HOME/jenkins.install.UpgradeWizard.state",
+        "mv /tmp/auth-user.groovy $JENKINS_HOME/init.hook.d/auth-user.groovy",
+        "chown -R jenkins:jenkins $JENKINS_HOME/"
+      ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "hcloud",
+      "token": "{{ user `hcloud_token` }}",
+      "image_filter": {
+        "with_selector": [
+          "name==jenkins-base",
+          "tool==packer"
+        ],
+        "most_recent": true
+      },
+      "ssh_username": "root",
+      "location": "nbg1",
+      "server_type": "cx11",
+      "snapshot_labels": {
+        "name": "jenkins-master",
+        "tool": "packer"
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "master-manifest.json"
+    }
+  ]
+}

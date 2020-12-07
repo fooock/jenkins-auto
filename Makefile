@@ -50,10 +50,13 @@ endif
 # |_|                             
 #
 
-packer-build:
+packer-check:
 	packer validate packer/os-base-snapshot.json 
-	packer build packer/os-base-snapshot.json
+	packer validate packer/os-master-snapshot.json 
 
+packer-build:
+	packer build packer/os-base-snapshot.json 
+	packer build packer/os-master-snapshot.json
 
 #  _                       __                     
 # | |                     / _|                    
