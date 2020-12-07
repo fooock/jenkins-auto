@@ -32,3 +32,15 @@ jobs:
       - name: Terraform validate
         id: validate
         run: terraform validate terraform
+
+    - name: Validate ansible playbook
+      uses: dawidd6/action-ansible-playbook@requirements
+      with:
+        playbook: playbook.yml
+        directory: ./ansible
+        inventory: |
+          [all]
+          localhost
+        options: |
+          --syntax-check
+        requirements: requirements.yml

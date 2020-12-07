@@ -1,3 +1,44 @@
+- name: Ensure group "jenkins" exists
+  group:
+    name: jenkins
+    state: present
+    gid: 1000
+
+- name: Add the user 'jenkins' with a primary group of 'jenkins'
+  user:
+    name: jenkins
+    group: jenkins
+    uid: 1000
+    shell: /bin/bash
+    home: /var/lib/jenkins
+    create_home: yes
+
+- name: Create Jenkins init.groovy.d directory
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+    mode: '0755'
+    owner: jenkins
+    group: jenkins
+
+- name: Copy jenkins.install.UpgradeWizard.state file
+  copy:
+    src: ../local/jenkins.install.UpgradeWizard.state
+    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
+- name: Copy init hooks files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+  with_items:
+    - { src: ../local/scripts/auth-user.groovy, dest: /var/lib/jenkins/init.groovy.d }
+
 - name: Add the Jenkins apt key from the server
   apt_key: 
     url: https://pkg.jenkins.io/debian/jenkins.io.key

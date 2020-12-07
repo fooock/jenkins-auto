@@ -5,19 +5,25 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "ansible/base-playbook.yml"
+      "playbook_file": "ansible/master-playbook.yml"
     }
   ],
   "builders": [
     {
       "type": "hcloud",
       "token": "{{ user `hcloud_token` }}",
-      "image": "ubuntu-20.04",
+      "image_filter": {
+        "with_selector": [
+          "name==jenkins-base",
+          "tool==packer"
+        ],
+        "most_recent": true
+      },
       "ssh_username": "root",
       "location": "nbg1",
       "server_type": "cx11",
       "snapshot_labels": {
-        "name": "jenkins-base",
+        "name": "jenkins-master",
         "tool": "packer"
       }
     }
@@ -25,7 +31,7 @@
   "post-processors": [
     {
       "type": "manifest",
-      "output": "base-manifest.json"
+      "output": "master-manifest.json"
     }
   ]
 }

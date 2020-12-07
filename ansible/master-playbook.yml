@@ -1,0 +1,13 @@
+- name: Provision Jenkins master image
+  hosts: all
+
+  pre_tasks:
+    - name: Shutdown if not Ubuntu system
+      command: /sbin/shutdown -t now
+      when: ansible_facts['os_family'] == "Ubuntu"
+
+  tasks:
+    - name: Include Jenkins tasks 
+      import_tasks: jenkins.yml
+      tags:
+        - jenkins

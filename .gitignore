@@ -1,4 +1,5 @@
 base-manifest.json
+master-manifest.json
 .terraform
 .terraform.lock.hcl
 terraform.tfstate
