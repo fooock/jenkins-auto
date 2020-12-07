@@ -2,6 +2,6 @@
 
 ```groovy
 Jenkins.get().pluginManager.plugins.each { 
-  println("${it.getShortName()}:${it.getVersion()}")
+  println "${it.getShortName()}:${it.getVersion()}"
 }
 ```
