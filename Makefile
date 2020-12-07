@@ -103,6 +103,7 @@ local-jenkins-start: generate-jenkins-auth
 	--name jenkins \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:50000:50000 \
+	-v jenkins_home:/var/jenkins_home \
 	-v $(shell pwd)/local/scripts:/usr/share/jenkins/ref/init.groovy.d/ \
 	-v $(shell pwd)/local/jenkins.install.UpgradeWizard.state:/var/jenkins_home/jenkins.install.UpgradeWizard.state \
 	jenkins/jenkins:lts

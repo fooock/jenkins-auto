@@ -28,7 +28,7 @@ resource "hcloud_server" "jenkins_master" {
   name        = "jenkins-master"
   server_type = "cx11"
   location    = "nbg1"
-  image       = data.hcloud_image.jenkins_master.name
+  image       = data.hcloud_image.jenkins_master.id
   ssh_keys    = var.ssh_keys
 }
 
