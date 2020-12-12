@@ -6,8 +6,6 @@ Install and configure Jenkins in an automated way using the [Hetzner](https://co
 
 You need to set an environment variable called `HCLOUD_TOKEN` in order to create all remote resources. To generate it, go to your [project](https://console.hetzner.cloud/projects) security tab and click on `Generate API Token` button.
 
->:moneybag: Keep in mind that you may be charged by the cloud provider if you use this repository. 
-
 #### Build
 
 ![Check project files](https://github.com/fooock/jenkins-auto/workflows/Check%20project%20files/badge.svg)
@@ -22,6 +20,8 @@ To execute this scripts you will need to have installed in your computer:
 * [Terraform](https://registry.terraform.io/) version `0.14.0`
 
 ## How to
+
+>:moneybag: Keep in mind that you may be charged by the cloud provider if you use this repository. 
 
 First you need to have all requirements installed on your local machine. Execute this directive:
 
