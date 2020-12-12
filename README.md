@@ -8,6 +8,8 @@ You need to set an environment variable called `HCLOUD_TOKEN` in order to create
 
 >:moneybag: Keep in mind that you may be charged by the cloud provider if you use this repository. 
 
+#### Build
+
 ![Check project files](https://github.com/fooock/jenkins-auto/workflows/Check%20project%20files/badge.svg)
 
 ## Tools you need
