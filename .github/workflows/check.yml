@@ -34,7 +34,7 @@ jobs:
         run: terraform validate terraform
 
       - name: Validate ansible base-playbook.yml file
-        uses: dawidd6/action-ansible-playbook@requirements
+        uses: dawidd6/action-ansible-playbook@v2.2.0
         with:
           playbook: base-playbook.yml
           directory: ./ansible
